@@ -26,12 +26,15 @@ public class ControlPersistencia {
     }
 
     public String eliminarEstado(int id) {
+       
         try {
             estado.destroy(id);
-        } catch (Exception e) {
-            mensaje = "Nose pudo eliminar la informacion";
-            System.out.println("Mensaje en eliminar: "+e.getMessage());
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+            mensaje = "No se pudo eliminar la informacion";
+            System.out.println("Mensaje en eliminar: "+ex.getMessage());
         }
+
 
         return mensaje;
     }
@@ -105,12 +108,12 @@ public class ControlPersistencia {
 
     }
 
-    public String eliminarObjetoEstado(String idString) {
+    public String eliminarObjetoEstado(Long id) {
         try {
-            objeto.destroy(Long.MIN_VALUE);
+            objeto.destroy(id);
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-            mensaje = "Nose pudo eliminar la informacion";
+            mensaje = "No se pudo eliminar la informacion";
             System.out.println("Mensaje en eliminar: "+ex.getMessage());
         }
         
@@ -183,12 +186,12 @@ public class ControlPersistencia {
         }
     }
 
-    public String eliminartipoObjeto(String idString) {
+    public String eliminartipoObjeto(int id) {
         try {
-            tbj.destroy(Integer.SIZE);
+            tbj.destroy(id);
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(ControlPersistencia.class.getName()).log(Level.SEVERE, null, ex);
-            mensaje = "Nose pudo eliminar la informacion";
+            mensaje = "No se pudo eliminar la informacion";
             System.out.println("Mensaje en eliminar: "+ex.getMessage());
         }
         return mensaje;
